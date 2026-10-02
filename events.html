@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upcoming Events & Tournaments | GAMEVERSE</title>
+  <meta name="description" content="Compete in premier esports tournaments, cups, and community challenges across Valorant, BGMI, Minecraft, EA Sports FC, and Forza.">
+  <meta name="theme-color" content="#050507">
+
+  <!-- Google Fonts: Orbitron, Inter, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Master Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='15,20 85,50 15,80' fill='%2300D9FF'/><circle cx='70' cy='50' r='14' fill='%237C3CFF'/></svg>">
+</head>
+<body>
+
+  <!-- Ambient Atmospherics -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-scanlines"></div>
+    <div class="glow-blob glow-blob-1"></div>
+    <div class="glow-blob glow-blob-2"></div>
+    <div class="glow-blob glow-blob-3"></div>
+    <canvas id="particles-canvas"></canvas>
+  </div>
+
+
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="GAMEVERSE Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,6 34,20 6,34" fill="url(#logo-grad-ev)" stroke="#00D9FF" stroke-width="1.5" />
+            <circle cx="28" cy="20" r="5" fill="#FF3D71" />
+            <defs>
+              <linearGradient id="logo-grad-ev" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3CFF" />
+                <stop offset="1" stop-color="#00D9FF" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">GAME<span>VERSE</span></div>
+      </a>
+
+      <!-- Center Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="games.html" class="nav-link">Games</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="events.html" class="nav-link active">Events</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="nav-actions">
+        <button class="btn-icon" id="nav-search-btn" title="Search Games" aria-label="Search Games">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn-icon" id="nav-fav-btn" title="Your Favorites" aria-label="View Saved Favorites" style="position: relative;">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-badge-count">0</span>
+        </button>
+        <a href="join.html" class="nav-join-btn">Join Community</a>
+        <button class="nav-toggle-btn" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Page Hero Header -->
+    <div class="page-hero">
+      <div class="container">
+        <h1>Upcoming <span>Events</span></h1>
+        <p>Tournaments, cups and challenges for every kind of gamer.</p>
+      </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <section style="padding: 1rem 0 6rem; position: relative; z-index: 2;">
+      <div class="container">
+        
+        <!-- Featured Next Tournament Countdown Card (Image 1) -->
+        <div class="countdown-card-hero reveal-fade">
+          <div class="countdown-badge">
+            <i class="fa-solid fa-bolt"></i> NEXT TOURNAMENT <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h2 class="countdown-game-title">Valorant Championship</h2>
+          
+          <div class="countdown-boxes" id="countdown-timer">
+            <div class="time-box">
+              <b id="cd-days">15</b>
+              <small>DAYS</small>
+            </div>
+            <div class="time-box">
+              <b id="cd-hours">19</b>
+              <small>HOURS</small>
+            </div>
+            <div class="time-box">
+              <b id="cd-mins">23</b>
+              <small>MINUTES</small>
+            </div>
+            <div class="time-box">
+              <b id="cd-secs">47</b>
+              <small>SECONDS</small>
+            </div>
+          </div>
+
+          <div>
+            <button class="demo-countdown-btn" id="demo-countdown-btn">
+              <i class="fa-solid fa-play"></i> DEMO: END IN 10 SECONDS
+            </button>
+          </div>
+        </div>
+
+        <!-- Grid of Tournaments (Image 1) -->
+        <div class="events-grid">
+          
+          <!-- Event 1: Valorant Championship -->
+          <article class="event-card-item reveal-fade" data-tournament="Valorant Championship">
+            <div class="event-game-tag">
+              <i class="fa-solid fa-gamepad"></i> Valorant
+            </div>
+            <h3 class="event-card-title">Valorant Championship</h3>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-calendar"></i>
+              <span><b>Date:</b> 18 Oct 2026</span>
+            </div>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-clock"></i>
+              <span><b>Time:</b> 6:00 PM</span>
+            </div>
+            <div class="event-prize-pool">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Prize Pool: ₹50,000</span>
+            </div>
+            <div class="event-participants">
+              <i class="fa-solid fa-users"></i>
+              <span><b>Participants:</b> <span class="participant-count" id="count-val">256</span></span>
+            </div>
+            <button class="btn-event-register" data-register="Valorant Championship">Register Now</button>
+          </article>
+
+          <!-- Event 2: BGMI Community Cup -->
+          <article class="event-card-item reveal-fade" data-tournament="BGMI Community Cup">
+            <div class="event-game-tag">
+              <i class="fa-solid fa-gamepad"></i> BGMI
+            </div>
+            <h3 class="event-card-title">BGMI Community Cup</h3>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-calendar"></i>
+              <span><b>Date:</b> 25 Oct 2026</span>
+            </div>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-clock"></i>
+              <span><b>Time:</b> 8:00 PM</span>
+            </div>
+            <div class="event-prize-pool">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Prize Pool: ₹30,000</span>
+            </div>
+            <div class="event-participants">
+              <i class="fa-solid fa-users"></i>
+              <span><b>Participants:</b> <span class="participant-count" id="count-bgmi">400</span></span>
+            </div>
+            <button class="btn-event-register" data-register="BGMI Community Cup">Register Now</button>
+          </article>
+
+          <!-- Event 3: Minecraft Build Battle -->
+          <article class="event-card-item reveal-fade" data-tournament="Minecraft Build Battle">
+            <div class="event-game-tag">
+              <i class="fa-solid fa-gamepad"></i> Minecraft
+            </div>
+            <h3 class="event-card-title">Minecraft Build Battle</h3>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-calendar"></i>
+              <span><b>Date:</b> 02 Nov 2026</span>
+            </div>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-clock"></i>
+              <span><b>Time:</b> 4:00 PM</span>
+            </div>
+            <div class="event-prize-pool">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Prize Pool: ₹10,000</span>
+            </div>
+            <div class="event-participants">
+              <i class="fa-solid fa-users"></i>
+              <span><b>Participants:</b> <span class="participant-count" id="count-mc">120</span></span>
+            </div>
+            <button class="btn-event-register" data-register="Minecraft Build Battle">Register Now</button>
+          </article>
+
+          <!-- Event 4: EA FC Tournament -->
+          <article class="event-card-item reveal-fade" data-tournament="EA FC Tournament">
+            <div class="event-game-tag">
+              <i class="fa-solid fa-gamepad"></i> EA Sports FC
+            </div>
+            <h3 class="event-card-title">EA FC Tournament</h3>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-calendar"></i>
+              <span><b>Date:</b> 08 Nov 2026</span>
+            </div>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-clock"></i>
+              <span><b>Time:</b> 7:30 PM</span>
+            </div>
+            <div class="event-prize-pool">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Prize Pool: ₹20,000</span>
+            </div>
+            <div class="event-participants">
+              <i class="fa-solid fa-users"></i>
+              <span><b>Participants:</b> <span class="participant-count" id="count-fc">180</span></span>
+            </div>
+            <button class="btn-event-register" data-register="EA FC Tournament">Register Now</button>
+          </article>
+
+          <!-- Event 5: Forza Horizon 6 Racing Challenge -->
+          <article class="event-card-item reveal-fade" data-tournament="Forza Horizon Racing Challenge">
+            <div class="event-game-tag">
+              <i class="fa-solid fa-gamepad"></i> Forza Horizon 6
+            </div>
+            <h3 class="event-card-title">Racing Challenge</h3>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-calendar"></i>
+              <span><b>Date:</b> 15 Nov 2026</span>
+            </div>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-clock"></i>
+              <span><b>Time:</b> 5:00 PM</span>
+            </div>
+            <div class="event-prize-pool">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Prize Pool: ₹15,000</span>
+            </div>
+            <div class="event-participants">
+              <i class="fa-solid fa-users"></i>
+              <span><b>Participants:</b> <span class="participant-count" id="count-forza">96</span></span>
+            </div>
+            <button class="btn-event-register" data-register="Forza Horizon Racing Challenge">Register Now</button>
+          </article>
+
+          <!-- Event 6: CS2 Tactical Showdown -->
+          <article class="event-card-item reveal-fade" data-tournament="CS2 Tactical Showdown">
+            <div class="event-game-tag">
+              <i class="fa-solid fa-gamepad"></i> Counter-Strike 2
+            </div>
+            <h3 class="event-card-title">CS2 Tactical Showdown</h3>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-calendar"></i>
+              <span><b>Date:</b> 22 Nov 2026</span>
+            </div>
+            <div class="event-meta-line">
+              <i class="fa-regular fa-clock"></i>
+              <span><b>Time:</b> 7:00 PM</span>
+            </div>
+            <div class="event-prize-pool">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Prize Pool: ₹40,000</span>
+            </div>
+            <div class="event-participants">
+              <i class="fa-solid fa-users"></i>
+              <span><b>Participants:</b> <span class="participant-count" id="count-cs2">128</span></span>
+            </div>
+            <button class="btn-event-register" data-register="CS2 Tactical Showdown">Register Now</button>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Tournament Registration Modal -->
+  <div class="modal-backdrop" id="tournament-modal" role="dialog" aria-modal="true" aria-label="Tournament Registration">
+    <div class="modal-container" style="max-width: 580px; padding: 2.5rem;">
+      <button class="modal-close-btn" id="tournament-modal-close" aria-label="Close Registration Modal">
+        <i class="fa-solid fa-xmark"></i>
+        <span>CLOSE</span>
+      </button>
+
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="badge" style="margin-bottom: 0.75rem;"><span class="badge-dot"></span> SECURE ENTRY</span>
+        <h2 class="modal-title" id="tourney-reg-title" style="font-size: 1.8rem;">Register for Event</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Lock in your spot. Official brackets and lobby keys will be transmitted to your terminal.</p>
+      </div>
+
+      <form id="tournament-reg-form">
+        <div style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="reg-gamertag">Gamer Tag / Username</label>
+          <input type="text" id="reg-gamertag" class="form-input" placeholder="e.g. ApexViper" required>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="reg-team">Squad / Team Name (Optional)</label>
+          <input type="text" id="reg-team" class="form-input" placeholder="e.g. Team Phoenix">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label class="form-label" for="reg-discord">Discord Tag (For Lobby Communication)</label>
+          <input type="text" id="reg-discord" class="form-input" placeholder="e.g. gamer#1337" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+          <span>CONFIRM REGISTRATION</span>
+          <i class="fa-solid fa-check"></i>
+        </button>
+      </form>
+
+      <div id="tourney-success-msg" style="display:none; margin-top: 1.5rem; padding: 1.25rem; background: rgba(0, 245, 160, 0.15); border: 1px solid var(--accent-emerald); border-radius: var(--radius-sm); text-align: center;">
+        <h4 style="color: var(--accent-emerald); font-family: var(--font-display); margin-bottom: 0.25rem;">REGISTRATION CONFIRMED!</h4>
+        <p style="color: #FFFFFF; font-size: 0.85rem;">You are officially registered. Match schedule generated.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favorites Drawer Modal -->
+  <div class="drawer-backdrop" id="fav-drawer" role="dialog" aria-modal="true" aria-label="Favorites Collection">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i class="fa-solid fa-heart" style="color: var(--accent-pink); margin-right: 0.5rem;"></i>
+          MY FAVORITES
+        </div>
+        <button class="drawer-close" aria-label="Close Favorites Drawer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="drawer-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text">GAME<span>VERSE</span></div>
+          <div class="footer-tagline">ENTER THE GAME. OWN THE MOMENT.</div>
+          <p class="footer-desc">
+            Competitive tournament circuits and community events designed to challenge players across elite gaming titles.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/diaz_gaming1?stkn=MXhpODR0ZnYwbGo1Yg==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com/@game_value?si=tZ27C8xFjK05Tmzm" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://discord.gg/BYzC9RX4d" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://x.com/RENews_X?s=20" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">NAVIGATION</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="games.html">Games Library</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="events.html">Events & Tournaments</a></li>
+            <li><a href="leaderboard.html">Global Leaderboard</a></li>
+            <li><a href="join.html">Join Community</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">TOURNAMENTS</h4>
+          <ul class="footer-links">
+            <li><a href="#">Valorant Premier</a></li>
+            <li><a href="#">BGMI Pro Series</a></li>
+            <li><a href="#">EA FC Masters Cup</a></li>
+            <li><a href="#">CS2 Tactical Majors</a></li>
+            <li><a href="#">Horizon Speed Week</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">TRANSMISSION FEED</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.75rem;">
+            Never miss registration deadlines or prize distributions.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="agent@gameverse.net" required aria-label="Your email address">
+            <button type="submit" class="btn btn-primary" style="padding: 0.85rem 1.4rem;">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 GAMEVERSE. Gaming showcase website. All trademarks belong to their respective publishers.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

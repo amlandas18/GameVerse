@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamer Community | GAMEVERSE</title>
+  <meta name="description" content="Connect with passionate gamers worldwide, discover teammates for competitive lobbies, share gameplay clips, and participate in lively game discussions.">
+  <meta name="theme-color" content="#050507">
+
+  <!-- Google Fonts: Orbitron, Inter, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Master Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='15,20 85,50 15,80' fill='%2300D9FF'/><circle cx='70' cy='50' r='14' fill='%237C3CFF'/></svg>">
+</head>
+<body>
+
+  <!-- Ambient Atmospherics -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-scanlines"></div>
+    <div class="glow-blob glow-blob-1"></div>
+    <div class="glow-blob glow-blob-2"></div>
+    <div class="glow-blob glow-blob-3"></div>
+    <canvas id="particles-canvas"></canvas>
+  </div>
+
+
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="GAMEVERSE Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,6 34,20 6,34" fill="url(#logo-grad-comm)" stroke="#00D9FF" stroke-width="1.5" />
+            <circle cx="28" cy="20" r="5" fill="#FF3D71" />
+            <defs>
+              <linearGradient id="logo-grad-comm" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3CFF" />
+                <stop offset="1" stop-color="#00D9FF" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">GAME<span>VERSE</span></div>
+      </a>
+
+      <!-- Center Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="games.html" class="nav-link">Games</a>
+        <a href="community.html" class="nav-link active">Community</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="nav-actions">
+        <button class="btn-icon" id="nav-search-btn" title="Search Games" aria-label="Search Games">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn-icon" id="nav-fav-btn" title="Your Favorites" aria-label="View Saved Favorites" style="position: relative;">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-badge-count">0</span>
+        </button>
+        <a href="join.html" class="nav-join-btn">Join Community</a>
+        <button class="nav-toggle-btn" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Page Hero Header -->
+    <div class="page-hero">
+      <div class="container">
+        <h1>Gamer <span>Community</span></h1>
+        <p>Ask for teammates, share clips and talk games with players from around the world.</p>
+      </div>
+    </div>
+
+    <!-- Community Content Area (Image 2) -->
+    <section style="padding: 1rem 0 6rem; position: relative; z-index: 2;">
+      <div class="container">
+        <div class="community-layout">
+          
+          <!-- Create a Post Card -->
+          <div class="create-post-card reveal-fade">
+            <h3 class="create-post-header">
+              <i class="fa-solid fa-pen-nib" style="color: var(--accent-pink);"></i>
+              Create a Post
+            </h3>
+            
+            <form id="community-post-form">
+              <input type="text" id="post-user-input" class="post-input" placeholder="Your gamer username" maxlength="25" required>
+              
+              <select id="post-game-select" class="post-select" aria-label="Select Game">
+                <option value="Valorant">Valorant</option>
+                <option value="Minecraft">Minecraft</option>
+                <option value="BGMI">BGMI</option>
+                <option value="Counter-Strike 2">Counter-Strike 2</option>
+                <option value="GTA V">Grand Theft Auto V</option>
+                <option value="Fortnite">Fortnite</option>
+                <option value="EA Sports FC">EA Sports FC 26</option>
+                <option value="Forza Horizon 6">Forza Horizon 6</option>
+                <option value="Elden Ring">Elden Ring Nightreign</option>
+                <option value="Other">Other</option>
+              </select>
+
+              <textarea id="post-text-input" class="post-textarea" placeholder="What's on your mind, gamer?" maxlength="320" required></textarea>
+              
+              <button type="submit" class="btn-publish-post">
+                <span>PUBLISH POST</span>
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Recent Discussions Feed -->
+          <div class="reveal-fade">
+            <h3 class="discussion-feed-title">
+              <i class="fa-regular fa-comments" style="color: var(--accent-cyan);"></i>
+              Recent Discussions <small id="discussions-count">4 posts</small>
+            </h3>
+
+            <div class="discussion-list" id="community-feed">
+              
+              <!-- Post 1: ShadowX -->
+              <article class="discussion-card">
+                <div class="discussion-header">
+                  <div class="discussion-user-wrap">
+                    <div class="user-avatar-badge avatar-purple">S</div>
+                    <div>
+                      <div class="user-meta-name">@ShadowX</div>
+                      <div class="user-meta-time"><i class="fa-regular fa-clock"></i> 2 hours ago</div>
+                    </div>
+                  </div>
+                  <span class="game-pill-badge">Valorant</span>
+                </div>
+                <p class="discussion-content">
+                  Anyone playing Valorant ranked tonight? Need a duelist for Immortal lobbies. Let's grind RR together!
+                </p>
+                <div class="discussion-actions">
+                  <button class="discussion-action-btn like-btn" data-liked="false" data-count="24">
+                    <i class="fa-regular fa-heart"></i>
+                    <span>24</span>
+                  </button>
+                  <button class="discussion-action-btn comment-toggle-btn">
+                    <i class="fa-regular fa-comment"></i>
+                    <span>Comments (1)</span>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Post 2: Blaze -->
+              <article class="discussion-card">
+                <div class="discussion-header">
+                  <div class="discussion-user-wrap">
+                    <div class="user-avatar-badge avatar-pink">B</div>
+                    <div>
+                      <div class="user-meta-name">@Blaze</div>
+                      <div class="user-meta-time"><i class="fa-regular fa-clock"></i> 5 hours ago</div>
+                    </div>
+                  </div>
+                  <span class="game-pill-badge">Minecraft</span>
+                </div>
+                <p class="discussion-content">
+                  Looking for a Minecraft survival squad. We are building a giant castle and automated redstone farms on our private realm!
+                </p>
+                <div class="discussion-actions">
+                  <button class="discussion-action-btn like-btn" data-liked="false" data-count="17">
+                    <i class="fa-regular fa-heart"></i>
+                    <span>17</span>
+                  </button>
+                  <button class="discussion-action-btn comment-toggle-btn">
+                    <i class="fa-regular fa-comment"></i>
+                    <span>Comments (0)</span>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Post 3: Nova -->
+              <article class="discussion-card">
+                <div class="discussion-header">
+                  <div class="discussion-user-wrap">
+                    <div class="user-avatar-badge avatar-cyan">N</div>
+                    <div>
+                      <div class="user-meta-name">@Nova</div>
+                      <div class="user-meta-time"><i class="fa-regular fa-clock"></i> Yesterday</div>
+                    </div>
+                  </div>
+                  <span class="game-pill-badge">BGMI</span>
+                </div>
+                <p class="discussion-content">
+                  Who is participating in the next BGMI tournament? Squad of 4, we have 1 slot open for an aggressive fragger or sniper.
+                </p>
+                <div class="discussion-actions">
+                  <button class="discussion-action-btn like-btn" data-liked="false" data-count="41">
+                    <i class="fa-regular fa-heart"></i>
+                    <span>41</span>
+                  </button>
+                  <button class="discussion-action-btn comment-toggle-btn">
+                    <i class="fa-regular fa-comment"></i>
+                    <span>Comments (1)</span>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Post 4: Viper -->
+              <article class="discussion-card">
+                <div class="discussion-header">
+                  <div class="discussion-user-wrap">
+                    <div class="user-avatar-badge avatar-purple">V</div>
+                    <div>
+                      <div class="user-meta-name">@Viper</div>
+                      <div class="user-meta-time"><i class="fa-regular fa-clock"></i> Yesterday</div>
+                    </div>
+                  </div>
+                  <span class="game-pill-badge">Counter-Strike 2</span>
+                </div>
+                <p class="discussion-content">
+                  Mastering the new sub-tick smokes on Inferno. Practice scrim tonight at 8 PM, drop your steam friend codes below!
+                </p>
+                <div class="discussion-actions">
+                  <button class="discussion-action-btn like-btn" data-liked="false" data-count="35">
+                    <i class="fa-regular fa-heart"></i>
+                    <span>35</span>
+                  </button>
+                  <button class="discussion-action-btn comment-toggle-btn">
+                    <i class="fa-regular fa-comment"></i>
+                    <span>Comments (3)</span>
+                  </button>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Favorites Drawer Modal -->
+  <div class="drawer-backdrop" id="fav-drawer" role="dialog" aria-modal="true" aria-label="Favorites Collection">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i class="fa-solid fa-heart" style="color: var(--accent-pink); margin-right: 0.5rem;"></i>
+          MY FAVORITES
+        </div>
+        <button class="drawer-close" aria-label="Close Favorites Drawer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="drawer-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text">GAME<span>VERSE</span></div>
+          <div class="footer-tagline">ENTER THE GAME. OWN THE MOMENT.</div>
+          <p class="footer-desc">
+            The beating heart of our community. Connect, coordinate squads, and share triumphs with gamers worldwide.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/diaz_gaming1?stkn=MXhpODR0ZnYwbGo1Yg==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com/@game_value?si=tZ27C8xFjK05Tmzm" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://discord.gg/BYzC9RX4d" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://x.com/RENews_X?s=20" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">NAVIGATION</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="games.html">Games Library</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="events.html">Events & Tournaments</a></li>
+            <li><a href="leaderboard.html">Global Leaderboard</a></li>
+            <li><a href="join.html">Join Community</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">CHANNELS</h4>
+          <ul class="footer-links">
+            <li><a href="#">LFG Squad Finder</a></li>
+            <li><a href="#">Clip Highlights</a></li>
+            <li><a href="#">Tournament Scrims</a></li>
+            <li><a href="#">Meta Builds & Guides</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">COMMUNITY DIGEST</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.75rem;">
+            Get weekly highlights of top clips, discussions, and member spotlights.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="gamer@gameverse.net" required aria-label="Your email address">
+            <button type="submit" class="btn btn-primary" style="padding: 0.85rem 1.4rem;">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 GAMEVERSE. Gaming showcase website. All trademarks belong to their respective publishers.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAMEVERSE | Enter the Game. Own the Moment.</title>
+  <meta name="description" content="GAMEVERSE is a futuristic next-generation gaming showcase and catalog. Discover 15 blockbuster worlds, explore genres, check ratings, and experience pure interactive gaming immersion.">
+  <meta name="theme-color" content="#050507">
+
+  <!-- Google Fonts: Orbitron, Inter, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Master Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='15,20 85,50 15,80' fill='%2300D9FF'/><circle cx='70' cy='50' r='14' fill='%237C3CFF'/></svg>">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Background Atmosphere (Grid, Noise, Particles, Glowing Blobs)
+       ========================================================================= -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-scanlines"></div>
+    <div class="glow-blob glow-blob-1"></div>
+    <div class="glow-blob glow-blob-2"></div>
+    <div class="glow-blob glow-blob-3"></div>
+    <canvas id="particles-canvas"></canvas>
+  </div>
+
+
+
+  <!-- =========================================================================
+       1. Fixed Transparent & Blurred Navbar
+       ========================================================================= -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      
+      <!-- Logo -->
+      <a href="#hero" class="nav-logo" aria-label="GAMEVERSE Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,6 34,20 6,34" fill="url(#logo-grad)" stroke="#00D9FF" stroke-width="1.5" />
+            <circle cx="28" cy="20" r="5" fill="#FF3D71" filter="url(#glow-filter)" />
+            <defs>
+              <linearGradient id="logo-grad" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3CFF" />
+                <stop offset="1" stop-color="#00D9FF" />
+              </linearGradient>
+              <filter id="glow-filter" x="18" y="10" width="20" height="20" filterUnits="userSpaceOnUse">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">GAME<span>VERSE</span></div>
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="games.html" class="nav-link">Games</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="nav-actions">
+        <!-- Search Trigger Button -->
+        <button class="btn-icon" id="nav-search-btn" title="Quick Search" aria-label="Search Game Library">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Favorites Trigger Button -->
+        <button class="btn-icon" id="nav-fav-btn" title="Your Favorites" aria-label="View Saved Favorites" style="position: relative;">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-badge-count">0</span>
+        </button>
+
+        <!-- Join Community CTA Button -->
+        <a href="join.html" class="nav-join-btn">
+          Join Community
+        </a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="nav-toggle-btn" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Content Wrap -->
+  <main>
+
+    <!-- =======================================================================
+         2 & 3. Full-Screen Cinematic Hero & Interactive Slider (90-100vh)
+         ======================================================================= -->
+    <section class="hero-section" id="hero">
+      
+      <!-- Background Slider Track -->
+      <div class="hero-slider-wrap">
+        <!-- Slides dynamically populated & crossfaded by JavaScript using uploaded images -->
+      </div>
+
+      <!-- Cinematic Gradient Overlays -->
+      <div class="hero-overlay"></div>
+
+      <!-- Hero Main Content -->
+      <div class="container">
+        <div class="hero-content">
+          
+          <!-- Small Label -->
+          <div class="hero-featured-tag">
+            <span class="badge" id="hero-badge">
+              <span class="badge-dot"></span> FEATURED EXPERIENCE
+            </span>
+          </div>
+
+          <!-- Large Cinematic Typography -->
+          <h1 class="hero-title" id="hero-title">
+            ENTER<br>
+            <span class="text-gradient">THE GAME</span>
+          </h1>
+
+          <!-- Dynamic Game Genre & Tagline -->
+          <div class="hero-game-badge" id="hero-game-info">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>NEXT-GEN BLOCKBUSTER SHOWCASE</span>
+          </div>
+
+          <!-- Description -->
+          <p class="hero-desc hero-description" id="hero-desc">
+            Discover worlds built for competition, exploration, strategy and unforgettable moments. Experience 15 definitive titles crafted with cutting-edge visuals and limitless interactive possibilities.
+          </p>
+
+          <!-- Buttons -->
+          <div class="hero-buttons">
+            <a href="#library" class="btn btn-primary" id="hero-explore-btn">
+              <span>EXPLORE ALL WORLDS</span>
+              <i class="fa-solid fa-compass"></i>
+            </a>
+            <a href="community.html" class="btn btn-secondary">
+              <i class="fa-solid fa-users"></i>
+              <span>GAMER COMMUNITY</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bottom Slider Indicators & Controls -->
+      <div class="hero-controls">
+        <div class="hero-indicator">
+          <span class="current-slide">01</span> / <span class="total-slides">05</span>
+        </div>
+        <div class="slider-arrows">
+          <button type="button" class="slider-arrow-btn" id="hero-prev-btn" aria-label="Previous Slide" title="Previous Slide">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button type="button" class="slider-arrow-btn" id="hero-next-btn" aria-label="Next Slide" title="Next Slide">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Vertical Scroll Indicator -->
+      <div class="hero-scroll-indicator">
+        <span class="hero-scroll-text">SCROLL TO DISCOVER</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+
+      <!-- Progress Track -->
+      <div class="hero-progress-track">
+        <div class="hero-progress-bar"></div>
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         4. Featured Games ("FEATURED WORLDS")
+         ======================================================================= -->
+    <section class="featured-section" id="featured">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-label">CURATED UNIVERSE</span>
+          <h2 class="section-title">FEATURED <span class="text-gradient">WORLDS</span></h2>
+          <p class="section-subtitle">
+            Different worlds. Different rules. One place to play. Immerse yourself in monumental landscapes engineered for greatness.
+          </p>
+        </div>
+
+        <div class="featured-grid">
+          
+          <!-- Featured Card 1: Elden Ring Nightreign -->
+          <article class="featured-card reveal-fade" data-id="3">
+            <div class="featured-card-img-wrap">
+              <img class="featured-card-img" src="assets/images/elden-ring.jpg" alt="Elden Ring Nightreign Artwork" loading="lazy">
+            </div>
+            <div class="featured-card-overlay"></div>
+            <div class="featured-card-content">
+              <span class="featured-tag">Action / RPG</span>
+              <h3 class="featured-card-title">Elden Ring Nightreign</h3>
+              <p class="featured-card-desc">
+                Embrace the nocturnal eclipse in the shadowed reaches of the Lands Between. Face primordial demigods with celestial sorceries.
+              </p>
+              <div class="featured-card-action">
+                <span>Explore Realm</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+          </article>
+
+          <!-- Featured Card 2: Forza Horizon 6 -->
+          <article class="featured-card reveal-fade" data-id="9">
+            <div class="featured-card-img-wrap">
+              <img class="featured-card-img" src="assets/images/forza6.jpg" alt="Forza Horizon 6 Artwork" loading="lazy">
+            </div>
+            <div class="featured-card-overlay"></div>
+            <div class="featured-card-content">
+              <span class="featured-tag">Racing / Open World</span>
+              <h3 class="featured-card-title">Forza Horizon 6</h3>
+              <p class="featured-card-desc">
+                Unleash pure automotive euphoria across sprawling neon streets, coastal highways, and mountain passes in 700+ hypercars.
+              </p>
+              <div class="featured-card-action">
+                <span>Explore Realm</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+          </article>
+
+          <!-- Featured Card 3: Red Dead Redemption 2 -->
+          <article class="featured-card reveal-fade" data-id="6">
+            <div class="featured-card-img-wrap">
+              <img class="featured-card-img" src="assets/images/rdr2.jpg" alt="Red Dead Redemption 2 Artwork" loading="lazy">
+            </div>
+            <div class="featured-card-overlay"></div>
+            <div class="featured-card-content">
+              <span class="featured-tag">Action / Adventure</span>
+              <h3 class="featured-card-title">Red Dead Redemption 2</h3>
+              <p class="featured-card-desc">
+                Arthur Morgan's timeless frontier journey. Survive in an unforgiving, hyper-detailed living world at the turn of the century.
+              </p>
+              <div class="featured-card-action">
+                <span>Explore Realm</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         5 & 6. Game Library Grid & Filter Controls (All 15 Games)
+         ======================================================================= -->
+    <section class="library-section" id="library">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-label">COMPLETE CATALOG</span>
+          <h2 class="section-title">THE <span class="text-gradient">LIBRARY</span></h2>
+          <p class="section-subtitle">
+            Explore all 15 powerhouse titles in our permanent roster. Filter by genre, search your favorites, and uncover deep gameplay details.
+          </p>
+        </div>
+
+        <!-- Interactive Toolbar: Search & Genre Filters -->
+        <div class="library-toolbar reveal-fade" id="genres">
+          
+          <!-- Search Bar -->
+          <div class="search-box-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
+            <input type="text" class="search-input" placeholder="Search your next adventure (e.g. GTA, Witcher, CS2)..." aria-label="Search game titles">
+            <button class="search-clear-btn" aria-label="Clear search" title="Clear search">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Genre Filter Buttons -->
+          <div class="filter-tabs" role="tablist" aria-label="Filter games by genre">
+            <button class="filter-btn active" data-filter="all" role="tab">All</button>
+            <button class="filter-btn" data-filter="action" role="tab">Action</button>
+            <button class="filter-btn" data-filter="shooter" role="tab">Shooter</button>
+            <button class="filter-btn" data-filter="rpg" role="tab">RPG</button>
+            <button class="filter-btn" data-filter="sports" role="tab">Sports</button>
+            <button class="filter-btn" data-filter="racing" role="tab">Racing</button>
+            <button class="filter-btn" data-filter="strategy" role="tab">Strategy</button>
+            <button class="filter-btn" data-filter="survival" role="tab">Survival</button>
+            <button class="filter-btn" data-filter="open-world" role="tab">Open World</button>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Game Card Grid (15 Games Loaded via JS) -->
+        <div class="library-grid" id="library-container">
+          <!-- Populated by script.js with authentic metadata & 3D tilt interaction -->
+        </div>
+
+        <!-- Empty Results State -->
+        <div class="library-empty">
+          <div class="library-empty-icon">
+            <i class="fa-solid fa-ghost"></i>
+          </div>
+          <h3 class="library-empty-title">No Worlds Found</h3>
+          <p class="library-empty-sub">We couldn't match any titles with that criteria. Try clearing your search or selecting "All".</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         8. Trending Section ("WHAT'S HOT" / EDITORIAL SHOWCASE)
+         ======================================================================= -->
+    <section class="trending-section" id="trending">
+      <div class="container">
+        
+        <div class="section-header reveal-fade">
+          <span class="section-label">EDITORIAL SHOWCASE</span>
+          <h2 class="section-title">WHAT'S <span class="text-gradient-fire">HOT</span></h2>
+          <p class="section-subtitle">
+            Curated featured picks dominating community play sessions, tactical discussions, and esports arenas this season.
+          </p>
+        </div>
+
+        <div class="trending-list">
+          
+          <!-- Item 01: GTA V -->
+          <div class="trending-item reveal-fade" data-id="15">
+            <div class="trending-rank">01</div>
+            <div class="trending-thumb-wrap">
+              <img class="trending-thumb" src="assets/images/gta5.jpg" alt="GTA V thumbnail" loading="lazy">
+            </div>
+            <div class="trending-info">
+              <h3 class="trending-title">Grand Theft Auto V</h3>
+              <div class="trending-meta">
+                <span class="trending-genre">Action / Open World</span>
+                <span>•</span>
+                <span>Rockstar Games</span>
+                <span>•</span>
+                <span>★ 5.0</span>
+              </div>
+            </div>
+            <div class="trending-action">
+              <button class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.75rem;">
+                <span>View</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 02: Red Dead Redemption 2 -->
+          <div class="trending-item reveal-fade" data-id="6">
+            <div class="trending-rank">02</div>
+            <div class="trending-thumb-wrap">
+              <img class="trending-thumb" src="assets/images/rdr2.jpg" alt="RDR 2 thumbnail" loading="lazy">
+            </div>
+            <div class="trending-info">
+              <h3 class="trending-title">Red Dead Redemption 2</h3>
+              <div class="trending-meta">
+                <span class="trending-genre">Action / RPG</span>
+                <span>•</span>
+                <span>Rockstar Games</span>
+                <span>•</span>
+                <span>★ 5.0</span>
+              </div>
+            </div>
+            <div class="trending-action">
+              <button class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.75rem;">
+                <span>View</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 03: Valorant -->
+          <div class="trending-item reveal-fade" data-id="10">
+            <div class="trending-rank">03</div>
+            <div class="trending-thumb-wrap">
+              <img class="trending-thumb" src="assets/images/valorant.jpg" alt="Valorant thumbnail" loading="lazy">
+            </div>
+            <div class="trending-info">
+              <h3 class="trending-title">Valorant</h3>
+              <div class="trending-meta">
+                <span class="trending-genre">Tactical Shooter</span>
+                <span>•</span>
+                <span>Riot Games</span>
+                <span>•</span>
+                <span>★ 4.9</span>
+              </div>
+            </div>
+            <div class="trending-action">
+              <button class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.75rem;">
+                <span>View</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 04: Elden Ring Nightreign -->
+          <div class="trending-item reveal-fade" data-id="3">
+            <div class="trending-rank">04</div>
+            <div class="trending-thumb-wrap">
+              <img class="trending-thumb" src="assets/images/elden-ring.jpg" alt="Elden Ring thumbnail" loading="lazy">
+            </div>
+            <div class="trending-info">
+              <h3 class="trending-title">Elden Ring Nightreign</h3>
+              <div class="trending-meta">
+                <span class="trending-genre">Action RPG</span>
+                <span>•</span>
+                <span>FromSoftware</span>
+                <span>•</span>
+                <span>★ 4.9</span>
+              </div>
+            </div>
+            <div class="trending-action">
+              <button class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.75rem;">
+                <span>View</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 05: Forza Horizon 6 -->
+          <div class="trending-item reveal-fade" data-id="9">
+            <div class="trending-rank">05</div>
+            <div class="trending-thumb-wrap">
+              <img class="trending-thumb" src="assets/images/forza6.jpg" alt="Forza Horizon 6 thumbnail" loading="lazy">
+            </div>
+            <div class="trending-info">
+              <h3 class="trending-title">Forza Horizon 6</h3>
+              <div class="trending-meta">
+                <span class="trending-genre">Racing Simulator</span>
+                <span>•</span>
+                <span>Playground Games</span>
+                <span>•</span>
+                <span>★ 4.9</span>
+              </div>
+            </div>
+            <div class="trending-action">
+              <button class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.75rem;">
+                <span>View</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         9. Gaming Stats Experience Section ("MORE THAN A GAME.")
+         ======================================================================= -->
+    <section class="stats-section" id="about">
+      <div class="container">
+        
+        <div class="section-header reveal-fade" style="text-align: center; max-width: 750px; margin-left: auto; margin-right: auto;">
+          <span class="section-label" style="justify-content: center;">METRIC ARCHITECTURE</span>
+          <h2 class="section-title">MORE THAN <span class="text-gradient">A GAME.</span></h2>
+          <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">
+            A unified digital nexus engineered to bridge legendary gaming legacies, next-generation visuals, and unmatched tactical mastery.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+          
+          <div class="stat-card reveal-fade">
+            <div class="stat-number" data-target="15" data-suffix="+">15+</div>
+            <div class="stat-label">GAMES SHOWCASED</div>
+          </div>
+
+          <div class="stat-card reveal-fade">
+            <div class="stat-number" data-target="6" data-prefix="0">06</div>
+            <div class="stat-label">GENRES CURATED</div>
+          </div>
+
+          <div class="stat-card reveal-fade">
+            <div class="stat-number">∞</div >
+            <div class="stat-label">ADVENTURES</div>
+          </div>
+
+          <div class="stat-card reveal-fade">
+            <div class="stat-number" data-target="1" data-prefix="0">01</div>
+            <div class="stat-label">GAMEVERSE</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         10. Parallax Banner Section ("CHOOSE YOUR WORLD.")
+         ======================================================================= -->
+    <section class="parallax-section">
+      <div class="parallax-bg"></div>
+      <div class="parallax-overlay"></div>
+      <div class="parallax-content reveal-fade">
+        <h2 class="parallax-title">CHOOSE YOUR WORLD.</h2>
+        <div class="parallax-pillars">
+          <span class="pillar-item">COMPETE</span>
+          <span class="pillar-item">EXPLORE</span>
+          <span class="pillar-item">BUILD</span>
+          <span class="pillar-item">SURVIVE</span>
+        </div>
+        <a href="#library" class="btn btn-primary" style="padding: 1.1rem 2.4rem; font-size: 0.95rem;">
+          <span>Explore The Collection</span>
+          <i class="fa-solid fa-arrow-down"></i>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       7. Game Details Modal
+       ========================================================================= -->
+  <div class="modal-backdrop" id="game-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-container">
+      
+      <!-- Close Button -->
+      <button class="modal-close-btn" aria-label="Close Game Details Modal">
+        <i class="fa-solid fa-xmark"></i>
+        <span>CLOSE</span>
+      </button>
+
+      <!-- Modal Hero Header -->
+      <div class="modal-hero">
+        <img id="modal-img" class="modal-hero-img" src="" alt="Game Artwork">
+        <div class="modal-hero-overlay"></div>
+        <div class="modal-header-content">
+          <span class="badge" id="modal-badge" style="margin-bottom: 0.5rem;">GENRE</span>
+          <h2 class="modal-title" id="modal-title">GAME TITLE</h2>
+          <div class="modal-meta-row">
+            <div id="modal-rating" class="game-card-rating"></div>
+            <div class="info-value" id="modal-year" style="color: var(--accent-cyan);">2025</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="modal-body">
+        <div class="modal-grid">
+          
+          <!-- Left Main Column -->
+          <div class="modal-info-col">
+            <p class="modal-description" id="modal-desc"></p>
+            
+            <h4 class="modal-highlights-title">EXPERIENCE HIGHLIGHTS</h4>
+            <ul class="modal-highlights-list" id="modal-highlights"></ul>
+          </div>
+
+          <!-- Right Sidebar Column -->
+          <div class="modal-sidebar">
+            <div class="modal-info-panel">
+              <div class="info-item">
+                <div class="info-label">DEVELOPER / STUDIO</div>
+                <div class="info-value" id="modal-developer">Studio</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">TARGET PLATFORMS</div>
+                <div class="info-value" id="modal-platforms">PC • Consoles</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">AUDIO / VISUALS</div>
+                <div class="info-value" style="color: var(--accent-emerald);">4K HDR • Spatial Audio</div>
+              </div>
+            </div>
+
+            <div class="modal-actions">
+              <button class="btn btn-primary" id="modal-fav-toggle">
+                <i class="fa-regular fa-heart"></i>
+                <span>Add to Favorites</span>
+              </button>
+              <a href="community.html" class="btn btn-secondary">
+                <i class="fa-solid fa-comments"></i>
+                <span>Discuss Game</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Favorites Sliding Drawer
+       ========================================================================= -->
+  <div class="drawer-backdrop" id="fav-drawer" role="dialog" aria-modal="true" aria-label="Favorites Collection">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i class="fa-solid fa-heart" style="color: var(--accent-pink); margin-right: 0.5rem;"></i>
+          MY FAVORITES
+        </div>
+        <button class="drawer-close" aria-label="Close Favorites Drawer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="drawer-body">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       11. Footer (Dark Premium & Futuristic)
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      
+      <div class="footer-top">
+        
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <div class="logo-text">GAME<span>VERSE</span></div>
+          <div class="footer-tagline">ENTER THE GAME. OWN THE MOMENT.</div>
+          <p class="footer-desc">
+            A premier interactive gaming platform bringing together the worlds of survival, tactical combat, deep RPG lore, and competitive esports.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/diaz_gaming1?stkn=MXhpODR0ZnYwbGo1Yg==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@game_value?si=tZ27C8xFjK05Tmzm" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://discord.gg/BYzC9RX4d" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord">
+              <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="https://x.com/RENews_X?s=20" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (formerly Twitter)">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+          <h4 class="footer-column-title">NAVIGATION</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="games.html">Games Library</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="events.html">Events & Tournaments</a></li>
+            <li><a href="leaderboard.html">Global Leaderboard</a></li>
+            <li><a href="join.html">Join Community</a></li>
+          </ul>
+        </div>
+
+        <!-- Genres Direct Access -->
+        <div class="footer-column">
+          <h4 class="footer-column-title">WORLDS</h4>
+          <ul class="footer-links">
+            <li><a href="#library">Battle Royale</a></li>
+            <li><a href="#library">Tactical Shooters</a></li>
+            <li><a href="#library">Dark Fantasy RPGs</a></li>
+            <li><a href="#library">Speed & Simulators</a></li>
+            <li><a href="#library">Grand Strategy</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter Subscription -->
+        <div class="footer-column">
+          <h4 class="footer-column-title">TRANSMISSION FEED</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.75rem;">
+            Subscribe to receive next-gen drop alerts, tournament dates, and developer insights directly to your terminal.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="agent@gameverse.net" required aria-label="Your email address">
+            <button type="submit" class="btn btn-primary" style="padding: 0.85rem 1.4rem;">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 GAMEVERSE. Gaming showcase website. All trademarks belong to their respective publishers.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" style="color: var(--text-dim); text-decoration: none;">Privacy Protocol</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none;">Terms of Engagement</a>
+          <a href="#" style="color: var(--text-dim); text-decoration: none;">Telemetry Settings</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Engine -->
+  <script src="script.js"></script>
+
+</body>
+</html>

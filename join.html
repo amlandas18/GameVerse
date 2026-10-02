@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join the Community | GAMEVERSE</title>
+  <meta name="description" content="Create your official GAMEVERSE gamer profile. Unlock squad matchmaking, tournament eligibility, leaderboards, and exclusive drop alerts.">
+  <meta name="theme-color" content="#050507">
+
+  <!-- Google Fonts: Orbitron, Inter, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Master Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='15,20 85,50 15,80' fill='%2300D9FF'/><circle cx='70' cy='50' r='14' fill='%237C3CFF'/></svg>">
+</head>
+<body>
+
+  <!-- Ambient Atmospherics -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-scanlines"></div>
+    <div class="glow-blob glow-blob-1"></div>
+    <div class="glow-blob glow-blob-2"></div>
+    <div class="glow-blob glow-blob-3"></div>
+    <canvas id="particles-canvas"></canvas>
+  </div>
+
+
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="GAMEVERSE Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,6 34,20 6,34" fill="url(#logo-grad-jn)" stroke="#00D9FF" stroke-width="1.5" />
+            <circle cx="28" cy="20" r="5" fill="#FF3D71" />
+            <defs>
+              <linearGradient id="logo-grad-jn" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3CFF" />
+                <stop offset="1" stop-color="#00D9FF" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">GAME<span>VERSE</span></div>
+      </a>
+
+      <!-- Center Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="games.html" class="nav-link">Games</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="nav-actions">
+        <button class="btn-icon" id="nav-search-btn" title="Search Games" aria-label="Search Games">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn-icon" id="nav-fav-btn" title="Your Favorites" aria-label="View Saved Favorites" style="position: relative;">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-badge-count">0</span>
+        </button>
+        <a href="join.html" class="nav-join-btn" style="border-color: #FFFFFF !important; box-shadow: 0 0 25px #FF007A !important;">
+          Join Community
+        </a>
+        <button class="nav-toggle-btn" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Page Hero Header -->
+    <div class="page-hero">
+      <div class="container">
+        <h1>Join the <span>Community</span></h1>
+        <p>Create your gamer profile in under a minute. It is 100% free.</p>
+      </div>
+    </div>
+
+    <!-- Registration Form Section -->
+    <section style="padding: 1rem 0 6rem; position: relative; z-index: 2;">
+      <div class="container">
+        
+        <div class="join-form-card reveal-fade">
+          <div style="text-align: center; margin-bottom: 2.5rem;">
+            <span class="badge" style="margin-bottom: 0.75rem;"><span class="badge-dot"></span> CITIZEN REGISTRATION</span>
+            <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 900; color: #FFFFFF;">
+              MINT YOUR <span class="text-gradient">GAMER PASS</span>
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+              Fill in your credentials to participate in tournaments, earn XP, and unlock verified status.
+            </p>
+          </div>
+
+          <form id="gamer-join-form" novalidate>
+            <div class="form-grid-2col">
+              
+              <!-- Username -->
+              <div class="form-group">
+                <label class="form-label" for="join-username">Gamer Username *</label>
+                <input type="text" id="join-username" class="form-input" placeholder="e.g. NeonStriker" required minlength="3" maxlength="20">
+                <span class="form-error" id="err-username" style="color: var(--accent-pink); font-size: 0.75rem; margin-top: 0.25rem; display: block;"></span>
+              </div>
+
+              <!-- Full Name -->
+              <div class="form-group">
+                <label class="form-label" for="join-fullname">Full Name *</label>
+                <input type="text" id="join-fullname" class="form-input" placeholder="Your full name" required>
+                <span class="form-error" id="err-fullname" style="color: var(--accent-pink); font-size: 0.75rem; margin-top: 0.25rem; display: block;"></span>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label class="form-label" for="join-email">Email Address *</label>
+                <input type="email" id="join-email" class="form-input" placeholder="gamer@domain.com" required>
+                <span class="form-error" id="err-email" style="color: var(--accent-pink); font-size: 0.75rem; margin-top: 0.25rem; display: block;"></span>
+              </div>
+
+              <!-- Age -->
+              <div class="form-group">
+                <label class="form-label" for="join-age">Age *</label>
+                <input type="number" id="join-age" class="form-input" placeholder="e.g. 19" min="12" max="99" required>
+                <span class="form-error" id="err-age" style="color: var(--accent-pink); font-size: 0.75rem; margin-top: 0.25rem; display: block;"></span>
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <label class="form-label" for="join-password">Password (Min 6 Characters) *</label>
+                <input type="password" id="join-password" class="form-input" placeholder="Enter secure password" required minlength="6">
+                <div class="password-strength-bar">
+                  <div class="strength-fill" id="strength-fill"></div>
+                </div>
+                <span id="strength-label" style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.25rem; display: block;">Password Strength</span>
+                <span class="form-error" id="err-password" style="color: var(--accent-pink); font-size: 0.75rem; display: block;"></span>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group">
+                <label class="form-label" for="join-confirm">Confirm Password *</label>
+                <input type="password" id="join-confirm" class="form-input" placeholder="Re-enter password" required>
+                <span class="form-error" id="err-confirm" style="color: var(--accent-pink); font-size: 0.75rem; margin-top: 0.25rem; display: block;"></span>
+              </div>
+
+              <!-- Favorite Game Dropdown (Populated with 15 games) -->
+              <div class="form-group">
+                <label class="form-label" for="join-favgame">Primary Favorite Game *</label>
+                <select id="join-favgame" class="form-select" required>
+                  <option value="">-- Choose Your Game --</option>
+                  <option value="Valorant">Valorant</option>
+                  <option value="BGMI">Battlegrounds Mobile India (BGMI)</option>
+                  <option value="Minecraft Legends">Minecraft Legends</option>
+                  <option value="Elden Ring Nightreign">Elden Ring Nightreign</option>
+                  <option value="Counter-Strike 2">Counter-Strike 2</option>
+                  <option value="Age of Empires IV">Age of Empires IV</option>
+                  <option value="Red Dead Redemption 2">Red Dead Redemption 2</option>
+                  <option value="EA Sports FC 26">EA Sports FC 26</option>
+                  <option value="Fortnite">Fortnite</option>
+                  <option value="Forza Horizon 6">Forza Horizon 6</option>
+                  <option value="PUBG">PlayerUnknown's Battlegrounds</option>
+                  <option value="Call of Duty: Black Ops">Call of Duty: Black Ops</option>
+                  <option value="The Witcher 3">The Witcher 3: Wild Hunt</option>
+                  <option value="Civilization VI">Civilization VI</option>
+                  <option value="Grand Theft Auto V">Grand Theft Auto V</option>
+                </select>
+                <span class="form-error" id="err-favgame" style="color: var(--accent-pink); font-size: 0.75rem; display: block;"></span>
+              </div>
+
+              <!-- Platform -->
+              <div class="form-group">
+                <label class="form-label" for="join-platform">Primary Gaming Platform *</label>
+                <select id="join-platform" class="form-select" required>
+                  <option value="">-- Select Platform --</option>
+                  <option value="PC">PC Master Race</option>
+                  <option value="PlayStation">PlayStation 5</option>
+                  <option value="Xbox">Xbox Series X/S</option>
+                  <option value="Mobile">Mobile (Android / iOS)</option>
+                  <option value="Nintendo Switch">Nintendo Switch</option>
+                </select>
+                <span class="form-error" id="err-platform" style="color: var(--accent-pink); font-size: 0.75rem; display: block;"></span>
+              </div>
+
+              <!-- Country -->
+              <div class="form-group form-group-full">
+                <label class="form-label" for="join-country">Country / Region *</label>
+                <select id="join-country" class="form-select" required>
+                  <option value="">-- Select Country --</option>
+                  <option value="India">India</option>
+                  <option value="United States">United States</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Germany">Germany</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Brazil">Brazil</option>
+                  <option value="Other">Other Region</option>
+                </select>
+                <span class="form-error" id="err-country" style="color: var(--accent-pink); font-size: 0.75rem; display: block;"></span>
+              </div>
+
+              <!-- Terms Checkbox -->
+              <div class="form-group-full">
+                <div class="terms-checkbox-wrap">
+                  <input type="checkbox" id="join-terms" required>
+                  <label for="join-terms">I accept the GAMEVERSE Community Guidelines & Terms of Engagement</label>
+                </div>
+                <span class="form-error" id="err-terms" style="color: var(--accent-pink); font-size: 0.75rem; display: block;"></span>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="form-group-full">
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.15rem; font-size: 0.95rem;">
+                  <span>CREATE MY ACCOUNT</span>
+                  <i class="fa-solid fa-id-card"></i>
+                </button>
+              </div>
+
+            </div>
+          </form>
+
+          <!-- Success Banner with Gamer Badge Preview -->
+          <div class="join-success-banner" id="join-success-box">
+            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: var(--accent-emerald); margin-bottom: 1rem;"></i>
+            <h3>WELCOME TO GAMEVERSE!</h3>
+            <p style="color: #E0E0ED; margin-bottom: 1.5rem;">Your official Gamer ID Pass has been provisioned on the network.</p>
+            
+            <!-- Virtual Gamer Pass Card -->
+            <div style="max-width: 420px; margin: 0 auto; background: #0A0A12; border: 2px solid var(--accent-emerald); border-radius: var(--radius-md); padding: 1.5rem; text-align: left; box-shadow: 0 0 30px rgba(0, 245, 160, 0.3);">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.75rem; margin-bottom: 1rem;">
+                <span style="font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; color: var(--accent-emerald);">GAMEVERSE CITIZEN ID</span>
+                <span style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono);">STATUS: ACTIVE</span>
+              </div>
+              <div style="display: flex; gap: 1rem; align-items: center;">
+                <div class="user-avatar-badge avatar-cyan" id="card-avatar" style="width: 50px; height: 50px; font-size: 1.3rem;">G</div>
+                <div>
+                  <h4 style="font-family: var(--font-display); font-size: 1.2rem; color: #FFFFFF;" id="card-username">@Player</h4>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);" id="card-meta">Platform • Region</div>
+                </div>
+              </div>
+              <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.1); font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); display: flex; justify-content: space-between;">
+                <span>TIER: NOVICE EXPLORER</span>
+                <span>XP: 500 BONUS</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+              <a href="community.html" class="btn btn-secondary">
+                <span>Go To Community</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Favorites Drawer Modal -->
+  <div class="drawer-backdrop" id="fav-drawer" role="dialog" aria-modal="true" aria-label="Favorites Collection">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i class="fa-solid fa-heart" style="color: var(--accent-pink); margin-right: 0.5rem;"></i>
+          MY FAVORITES
+        </div>
+        <button class="drawer-close" aria-label="Close Favorites Drawer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="drawer-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text">GAME<span>VERSE</span></div>
+          <div class="footer-tagline">ENTER THE GAME. OWN THE MOMENT.</div>
+          <p class="footer-desc">
+            Your gateway to next-gen gaming experiences, esports ladders, and a vibrant community of millions.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/diaz_gaming1?stkn=MXhpODR0ZnYwbGo1Yg==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com/@game_value?si=tZ27C8xFjK05Tmzm" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://discord.gg/BYzC9RX4d" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://x.com/RENews_X?s=20" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">NAVIGATION</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="games.html">Games Library</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="events.html">Events & Tournaments</a></li>
+            <li><a href="leaderboard.html">Global Leaderboard</a></li>
+            <li><a href="join.html">Join Community</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">PRIVACY & PERKS</h4>
+          <ul class="footer-links">
+            <li><a href="#">VIP Member Benefits</a></li>
+            <li><a href="#">Account Security</a></li>
+            <li><a href="#">Two-Factor Auth</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">TRANSMISSION FEED</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.75rem;">
+            Subscribe to get immediate notification upon official game releases.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="agent@gameverse.net" required aria-label="Your email address">
+            <button type="submit" class="btn btn-primary" style="padding: 0.85rem 1.4rem;">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 GAMEVERSE. Gaming showcase website. All trademarks belong to their respective publishers.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

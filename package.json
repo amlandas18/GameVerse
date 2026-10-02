@@ -1,0 +1,25 @@
+{
+  "name": "gameverse",
+  "version": "1.0.0",
+  "description": "GAMEVERSE - Enter The Game. Own The Moment. Cinematic AAA Gaming Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "node server.js",
+    "build": "echo 'Ready for Render deployment'"
+  },
+  "keywords": [
+    "gameverse",
+    "gaming",
+    "render",
+    "showcase",
+    "html5",
+    "css3",
+    "javascript"
+  ],
+  "author": "GAMEVERSE",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local Environment & Logs
+*.log
+npm-debug.log*
+.env
+.env.local
+
+# Temp and Cache
+.tempmediaStorage/
+.system_generated/
+.gemini/

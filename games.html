@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games Library | GAMEVERSE</title>
+  <meta name="description" content="Explore all 15 blockbuster titles in the GAMEVERSE catalog. Filter by genre, search by title, and check gameplay highlights.">
+  <meta name="theme-color" content="#050507">
+
+  <!-- Google Fonts: Orbitron, Inter, Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Master Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='15,20 85,50 15,80' fill='%2300D9FF'/><circle cx='70' cy='50' r='14' fill='%237C3CFF'/></svg>">
+</head>
+<body>
+
+  <!-- Ambient Atmospherics -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-scanlines"></div>
+    <div class="glow-blob glow-blob-1"></div>
+    <div class="glow-blob glow-blob-2"></div>
+    <div class="glow-blob glow-blob-3"></div>
+    <canvas id="particles-canvas"></canvas>
+  </div>
+
+
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="GAMEVERSE Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="6,6 34,20 6,34" fill="url(#logo-grad-gm)" stroke="#00D9FF" stroke-width="1.5" />
+            <circle cx="28" cy="20" r="5" fill="#FF3D71" />
+            <defs>
+              <linearGradient id="logo-grad-gm" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7C3CFF" />
+                <stop offset="1" stop-color="#00D9FF" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text">GAME<span>VERSE</span></div>
+      </a>
+
+      <!-- Center Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="games.html" class="nav-link active">Games</a>
+        <a href="community.html" class="nav-link">Community</a>
+        <a href="events.html" class="nav-link">Events</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="nav-actions">
+        <button class="btn-icon" id="nav-search-btn" title="Search Games" aria-label="Search Games">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <button class="btn-icon" id="nav-fav-btn" title="Your Favorites" aria-label="View Saved Favorites" style="position: relative;">
+          <i class="fa-regular fa-heart"></i>
+          <span class="fav-badge-count">0</span>
+        </button>
+        <a href="join.html" class="nav-join-btn">Join Community</a>
+        <button class="nav-toggle-btn" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Page Hero Header -->
+    <div class="page-hero">
+      <div class="container">
+        <h1>Explore <span>Games</span></h1>
+        <p>Search the library, filter by genre and save your favorites.</p>
+      </div>
+    </div>
+
+    <!-- Main Library Discovery Section -->
+    <section class="library-section" id="library" style="padding-top: 1rem;">
+      <div class="container">
+        
+        <!-- Interactive Toolbar: Search & Genre Filters -->
+        <div class="library-toolbar reveal-fade" id="genres">
+          
+          <!-- Search Bar -->
+          <div class="search-box-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
+            <input type="text" class="search-input" placeholder="Search games by name (e.g. GTA, Witcher, CS2)..." aria-label="Search game titles">
+            <button class="search-clear-btn" aria-label="Clear search" title="Clear search">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Genre Filter Buttons -->
+          <div class="filter-tabs" role="tablist" aria-label="Filter games by genre">
+            <button class="filter-btn active" data-filter="all" role="tab">All</button>
+            <button class="filter-btn" data-filter="action" role="tab">Action</button>
+            <button class="filter-btn" data-filter="shooter" role="tab">Shooter</button>
+            <button class="filter-btn" data-filter="rpg" role="tab">RPG</button>
+            <button class="filter-btn" data-filter="sports" role="tab">Sports</button>
+            <button class="filter-btn" data-filter="racing" role="tab">Racing</button>
+            <button class="filter-btn" data-filter="strategy" role="tab">Strategy</button>
+            <button class="filter-btn" data-filter="survival" role="tab">Survival</button>
+            <button class="filter-btn" data-filter="open-world" role="tab">Open World</button>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Game Card Grid (15 Games Loaded via JS) -->
+        <div class="library-grid" id="library-container">
+          <!-- Populated by script.js -->
+        </div>
+
+        <!-- Empty Results State -->
+        <div class="library-empty">
+          <div class="library-empty-icon">
+            <i class="fa-solid fa-ghost"></i>
+          </div>
+          <h3 class="library-empty-title">No Worlds Found</h3>
+          <p class="library-empty-sub">We couldn't match any titles with that criteria. Try clearing your search or selecting "All".</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Game Details Modal -->
+  <div class="modal-backdrop" id="game-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-container">
+      <button class="modal-close-btn" aria-label="Close Game Details Modal">
+        <i class="fa-solid fa-xmark"></i>
+        <span>CLOSE</span>
+      </button>
+
+      <div class="modal-hero">
+        <img id="modal-img" class="modal-hero-img" src="" alt="Game Artwork">
+        <div class="modal-hero-overlay"></div>
+        <div class="modal-header-content">
+          <span class="badge" id="modal-badge" style="margin-bottom: 0.5rem;">GENRE</span>
+          <h2 class="modal-title" id="modal-title">GAME TITLE</h2>
+          <div class="modal-meta-row">
+            <div id="modal-rating" class="game-card-rating"></div>
+            <div class="info-value" id="modal-year" style="color: var(--accent-cyan);">2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div class="modal-info-col">
+            <p class="modal-description" id="modal-desc"></p>
+            <h4 class="modal-highlights-title">EXPERIENCE HIGHLIGHTS</h4>
+            <ul class="modal-highlights-list" id="modal-highlights"></ul>
+          </div>
+          <div class="modal-sidebar">
+            <div class="modal-info-panel">
+              <div class="info-item">
+                <div class="info-label">DEVELOPER / STUDIO</div>
+                <div class="info-value" id="modal-developer">Studio</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">TARGET PLATFORMS</div>
+                <div class="info-value" id="modal-platforms">PC • Consoles</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">AUDIO / VISUALS</div>
+                <div class="info-value" style="color: var(--accent-emerald);">4K HDR • Spatial Audio</div>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button class="btn btn-primary" id="modal-fav-toggle">
+                <i class="fa-regular fa-heart"></i>
+                <span>Add to Favorites</span>
+              </button>
+              <a href="community.html" class="btn btn-secondary">
+                <i class="fa-solid fa-comments"></i>
+                <span>Discuss Game</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favorites Drawer Modal -->
+  <div class="drawer-backdrop" id="fav-drawer" role="dialog" aria-modal="true" aria-label="Favorites Collection">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i class="fa-solid fa-heart" style="color: var(--accent-pink); margin-right: 0.5rem;"></i>
+          MY FAVORITES
+        </div>
+        <button class="drawer-close" aria-label="Close Favorites Drawer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="drawer-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text">GAME<span>VERSE</span></div>
+          <div class="footer-tagline">ENTER THE GAME. OWN THE MOMENT.</div>
+          <p class="footer-desc">
+            Explore 15 blockbuster worlds curated for high-adrenaline competition, deep storytelling, and limitless discovery.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/diaz_gaming1?stkn=MXhpODR0ZnYwbGo1Yg==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com/@game_value?si=tZ27C8xFjK05Tmzm" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://discord.gg/BYzC9RX4d" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://x.com/RENews_X?s=20" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">NAVIGATION</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="games.html">Games Library</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="events.html">Events & Tournaments</a></li>
+            <li><a href="leaderboard.html">Global Leaderboard</a></li>
+            <li><a href="join.html">Join Community</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">WORLDS</h4>
+          <ul class="footer-links">
+            <li><a href="#">Battle Royale</a></li>
+            <li><a href="#">Tactical Shooters</a></li>
+            <li><a href="#">Dark Fantasy RPGs</a></li>
+            <li><a href="#">Speed & Simulators</a></li>
+            <li><a href="#">Grand Strategy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-column-title">TRANSMISSION FEED</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 0.75rem;">
+            Subscribe to get immediate notification upon official game releases.
+          </p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="agent@gameverse.net" required aria-label="Your email address">
+            <button type="submit" class="btn btn-primary" style="padding: 0.85rem 1.4rem;">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 GAMEVERSE. Gaming showcase website. All trademarks belong to their respective publishers.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
